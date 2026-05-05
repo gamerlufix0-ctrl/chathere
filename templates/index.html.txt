@@ -1,0 +1,29 @@
+!DOCTYPE html>
+<html>
+<head>
+    <title>Mi Bot 😼</title>
+</head>
+<body>
+    <h1>🤖 Chat Bot</h1>
+
+    <input type="text" id="pregunta" placeholder="Escribe tu pregunta aquí...">
+    <button onclick="enviar()">Enviar</button>
+
+    <p id="respuesta"></p>
+
+    <script>
+        async function enviar() {
+            let pregunta = document.getElementById("pregunta").value;
+
+            let res = await fetch("/preguntar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ pregunta: pregunta })
+            });
+
+            let data = await res.json();
+            document.getElementById("respuesta").innerText = data.respuesta;
+        }
+    </script>
+</body>
+</html>
